@@ -2,29 +2,30 @@
 /*
     The purpose of these methods is to separate the core operations of sets
     of data into separate and generic units.
-    
-    FOLDING: Condensing a set of data down to 1 value
 */
 
 
 
-var IteratorsFolds = {};
+var FunctionIterators = {};
 
 
 /**
 * Successively apply a function to each value in an array.
 * Only works on 1 dimensional arrays.
+*
 * @function
-* @param terminalValue - Default start value 
+* @param terminalValue - Default start value
+*
+* FOLDING: Condensing a set of data down to 1 value
 */
-IteratorsFolds.FoldArray = function(fn, terminalValue, data)
+FunctionIterators.FoldArray = function(fn, terminalValue, data)
 {
     var [first, ...rest] = data;
     if(first == undefined)
     {
         return terminalValue;
     }
-    else return fn(first, IteratorsFolds.FoldArray(fn, terminalValue, rest) );
+    else return fn(first, FunctionIterators.FoldArray(fn, terminalValue, rest) );
     
     /*
         VISUALIZATION
@@ -42,7 +43,7 @@ IteratorsFolds.FoldArray = function(fn, terminalValue, data)
 * 
 * @function
 */
-IteratorsFolds.ArrayIterator = function(data)
+FunctionIterators.ArrayIterator = function(data)
 {
     var index = 0;
     return function()
@@ -68,7 +69,7 @@ IteratorsFolds.ArrayIterator = function(data)
 * Return an iterator that returns numbers in order when called.
 * @function
 */
-IteratorsFolds.NumberIterator = function(start=0)
+FunctionIterators.NumberIterator = function(start=0)
 {
     var number = start;
     return function()
@@ -81,7 +82,7 @@ IteratorsFolds.NumberIterator = function(start=0)
 * Returns an iterator that when called, returns the next number in the Fibonacci sequence.
 * @function
 */
-IteratorsFolds.FibonacciIterator = function()
+FunctionIterators.FibonacciIterator = function()
 {
     /*
     * FIBONACCI SEQUENCE:
@@ -112,7 +113,7 @@ IteratorsFolds.FibonacciIterator = function()
 * @functions
 * @param limit - The iterator will not be called more than this
 */
-IteratorsFolds.LimitIterator = function(iterator, limit)
+FunctionIterators.LimitIterator = function(iterator, limit)
 {
     var count = 0;
     var lastValue;
@@ -139,7 +140,7 @@ IteratorsFolds.LimitIterator = function(iterator, limit)
 * Expects the iterator to return an object with a done key and a value key
 * @function
 */
-IteratorsFolds.ToArray = function(iterator)
+FunctionIterators.ToArray = function(iterator)
 {
     var data = [];
     
@@ -160,7 +161,7 @@ IteratorsFolds.ToArray = function(iterator)
 *
 * @function
 */
-IteratorsFolds.MapWith = function(iterator, fn)
+FunctionIterators.MapWith = function(iterator, fn)
 {
     return function()
     {
@@ -178,7 +179,7 @@ IteratorsFolds.MapWith = function(iterator, fn)
 * @function
 * @param fn - Function that returns true if the value matches, and false if not
 */
-IteratorsFolds.Filter = function(iterator, fn)
+FunctionIterators.Filter = function(iterator, fn)
 {
     return function()
     {
@@ -214,14 +215,14 @@ IteratorsFolds.Filter = function(iterator, fn)
     var Square = (x)=>x*x;
     
     // Will return odd numbers when called
-    var oddIterator = IteratorsFolds.Filter(IteratorsFolds.NumberIterator(), IsOdd);
+    var oddIterator = FunctionIterators.Filter(FunctionIterators.NumberIterator(), IsOdd);
     
     /*
     * Limit the amount of times 'oddIterator' can be called.
     * CAUTION: limitedOddIterator has a 'reference' to 'oddIterator', not a 'copy'.
     */
-    var limitedOddIterator = IteratorsFolds.LimitIterator(oddIterator, 20);
-    var data = IteratorsFolds.ToArray(IteratorsFolds.MapWith(limitedOddIterator, Square) );
+    var limitedOddIterator = FunctionIterators.LimitIterator(oddIterator, 20);
+    var data = FunctionIterators.ToArray(FunctionIterators.MapWith(limitedOddIterator, Square) );
     
     console.log('20 odd numbers squared');
     console.log(data);
@@ -239,6 +240,6 @@ IteratorsFolds.Filter = function(iterator, fn)
 
 
 
-if (typeof module != 'undefined'){ module.exports = IteratorsFolds }
+if (typeof module != 'undefined'){ module.exports = FunctionIterators }
 
 

@@ -136,7 +136,7 @@ recipes.Once = function(fn, context)
 * EXAMPLE: Compose(sin, cos) = sin(cos(argument))
 * EXAMPLE: Compose(Add, Log, Multiply) = Add(Log(Multiply(argument)))
 *
-* NOTE: Each function passed in should return a value. Log in the above example should return a value
+* NOTE: Each function passed in should return a value. *Log* in the above example should return a value
 *
 * @function
 */
@@ -152,11 +152,6 @@ recipes.Compose = function Compose(firstFn, ...otherFn)
 	}
 }
 
-
-recipes.Get = function()
-{
-	
-}
 
 
 

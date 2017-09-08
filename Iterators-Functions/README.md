@@ -21,7 +21,7 @@ that would iterate through an array and add the values as it goes.
 - This combines the task of iterating through the array and adding values into 1
 - With folding we can separate that.  
 
-- The [FoldArray](iteratorsFolds.js) method would handle iterating through the list
+- The [FoldArray](iterators-functions.js) method would handle iterating through the list
 - The *fn* argument we pass to it would handle summing the values
 ```
 IteratorFolds.FoldArray( function(a,b){return a+b}, 0, array );
@@ -43,10 +43,10 @@ Expanding a seed value into an object or more values.
 Very much like generators.
 
 #### Unfolding Example
-The [NumberIterator](iteratorsFolds.js) wich takes a seed/start value and returns numbers in ascending order
+The [NumberIterator](iterators-functions.js) wich takes a seed/start value and returns numbers in ascending order
 from there.  
 
-Or the [FibonacciIterator](iteratorsFolds.js) wich returns numbers in the Fibonacci sequence.  
+Or the [FibonacciIterator](iterators-functions.js) wich returns numbers in the Fibonacci sequence.  
 
 Or a function that, given a seed/start, returns an array with every number before it.
 
@@ -75,7 +75,7 @@ Getting twenty odd numbers, squared in an array.
 
 This can be done with a function specifically made for this, or with a combination of the above functions.  
 
-See [iteratorsFolds.js near the bottom](iteratorsFolds.js)
+See [iterators-functions.js near the bottom](iterators-functions.js)
 
 
 
